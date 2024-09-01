@@ -1,3 +1,7 @@
+const WIDE_NUM = 10;
+const HIGH_NUM = 5;
+const FOSSILS_NUM = 20;
+
 const $id = (id, container) => (container || document).getElementById(id);
 const $ = (sel, container) => (container || document).querySelector(sel);
 
@@ -48,15 +52,16 @@ class FossilDig {
 	setFossilsPos() {
 		const { fossils, height, width } = this;
 		for (let f = fossils; f > 0; f--) {
-			const y = Math.floor(Math.random() * height);
-			const x = Math.floor(Math.random() * width);
+			const y = Math.floor(Math.random() * height).toString();
+			const x = Math.floor(Math.random() * width).toString();
 
 			if (!this.fossilsPos[x]) this.fossilsPos[x] = [];
 			// don't allow duplicates
 			if (this.fossilsPos[x].includes(y)) {
-				return f++;
+				f++;
+			} else {
+				this.fossilsPos[x].push(y.toString());
 			}
-			this.fossilsPos[x].push(y.toString());
 		}
 	}
 
@@ -66,6 +71,22 @@ class FossilDig {
 		console.log(`clicked: ${x},${y}`)
 		if (this.fossilsPos[x]?.includes(y)) {
 			cell.classList.add('has-fossil');
+		} else {
+			let adjacent = 0;
+			const ynum = parseInt(y);
+			const xnum = parseInt(x);
+			console.log(this.fossilsPos[x], x)
+			for (let yTest = ynum - 1; yTest <= ynum + 1; yTest++) {
+				for (let xTest = xnum - 1; xTest <= xnum + 1; xTest++) {
+					console.log(xTest, yTest, xnum, ynum)
+					if (xTest === x && yTest === y) break;
+					else if (this.fossilsPos[x]?.includes(yTest.toString())) {
+						console.log('adjacent')
+						adjacent++;
+					}
+				}
+			}
+			cell.innerText = adjacent;
 		}
 
 		cell.removeEventListener('click', this.checkForFossils);
@@ -82,4 +103,8 @@ class FossilDig {
 	}
 };
 
-const dig = new FossilDig({width: 20, height: 10, fossils: 10});
+const dig = new FossilDig({
+	width: WIDE_NUM,
+	height: HIGH_NUM,
+	fossils: FOSSILS_NUM
+});

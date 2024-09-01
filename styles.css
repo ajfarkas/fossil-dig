@@ -1,10 +1,14 @@
+html {
+	--size: 40px;
+}
+
 #dig {
 	background-color: tan;
 }
 .dig__cell {
 	position: relative;
-	width: 20px;
-	height: 20px;
+	width: var(--size);
+	height: var(--size);
 	outline: 0.5px solid white;
 	outline-offset: 0.5px;
 }
@@ -13,9 +17,6 @@
 	content: '';
 	display: block;
 	position: absolute;
-	width: 5px;
-	height: 5px;
-	border-radius: 1px;
 	background-color: grey;
 }
 .dig__cell:before {
@@ -31,6 +32,9 @@
 	border-radius: 50%;
 	left: 18px;
 	top: 2px;
+}
+.dig__cell:active {
+	outline: 2px inset grey;
 }
 
 .dig__cell.has-fossil {
