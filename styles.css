@@ -12,21 +12,21 @@ html {
 	outline: 0.5px solid white;
 	outline-offset: 0.5px;
 }
-.dig__cell:before,
-.dig__cell:after {
+.dig__cell:empty:before,
+.dig__cell:empty:after {
 	content: '';
 	display: block;
 	position: absolute;
 	background-color: grey;
 }
-.dig__cell:before {
+.dig__cell:empty:before {
 	width: 5px;
 	height: 5px;
 	border-radius: 2px;
 	top: 12px;
 	left: 6px;
 }
-.dig__cell:after {
+.dig__cell:empty:after {
 	width: 3px;
 	height: 3px;
 	border-radius: 50%;
@@ -37,6 +37,10 @@ html {
 	outline: 2px inset grey;
 }
 
+.dig__cell:not(:empty) {
+	background-color: black;
+	color: white;
+}
 .dig__cell.has-fossil {
 	background-color: red;
 }

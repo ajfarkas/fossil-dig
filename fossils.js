@@ -80,7 +80,7 @@ class FossilDig {
 				for (let xTest = xnum - 1; xTest <= xnum + 1; xTest++) {
 					console.log(xTest, yTest, xnum, ynum)
 					if (xTest === x && yTest === y) break;
-					else if (this.fossilsPos[x]?.includes(yTest.toString())) {
+					else if (this.fossilsPos[xTest]?.includes(yTest.toString())) {
 						console.log('adjacent')
 						adjacent++;
 					}
